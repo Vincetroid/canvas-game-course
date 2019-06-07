@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Game</title>
+</head>
+<body>
+    <canvas id="my_canvas"></canvas>
+<script>
+
+let canvas = null;
+let context = null;
+let img = null;
+let assets = [
+    './frames_mario/mariowalk01.png',
+    './frames_mario/mariowalk02.png',
+    './frames_mario/mariowalk03.png',
+];
+let frames = assets;
+
+setup = function() {
+    canvas = document.getElementById('my_canvas');
+    context = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    img = new Image();
+    img.onload = onImageLoad;
+    img.src = 'link.png';
+    
+};  
+
+onImageLoad = function() {
+    console.log('Se cargó la imagen');
+    context.drawImage(img, 192, 192);
+}
+
+setup();
+
+</script>
+</body>
+</html>
