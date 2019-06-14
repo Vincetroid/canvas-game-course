@@ -7,12 +7,23 @@
 </head>
 <body>
     <canvas id="my_canvas"></canvas>
+<script src="SpriteSheet.js"></script>
 <script>
+// "use strict";
+
+test();
 
 let canvas = null;
 let context = null;
 const frameRate = 1000 / 10;
 let frame = 0;
+// const assets = [
+//     spriteSheet.load('./sprite_sheet_intermediate/character-1.png'),
+//     spriteSheet.load('./sprite_sheet_intermediate/character-2.png'),
+//     spriteSheet.load('./sprite_sheet_intermediate/character-3.png'),
+//     spriteSheet.load('./sprite_sheet_intermediate/character-4.png'),
+//     spriteSheet.load('./sprite_sheet_intermediate/character-5.png'),
+// ];
 const assets = [
     './sprite_sheet_intermediate/character-1.png',
     './sprite_sheet_intermediate/character-2.png',
@@ -22,11 +33,32 @@ const assets = [
 ];
 const frames = [];
 
+const loadAtlas = function(urlRequest) {
+    let requestAtlas = new Request(urlRequest);
+
+    fetch(requestAtlas)
+        .then(function(resp) {
+            console.log('entro')
+            console.log(resp)
+            return resp.json();
+        })
+        .then(function(data) {
+            console.log(data)
+            return data;
+        });
+}
+
 const setup = function() {
     canvas = document.getElementById('my_canvas');
     context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    // loadAtlas("./sprite_sheet_result_grid_strip/character.json");
+    const atlasJSON = loadAtlas("./sprite_sheet_result_grid_strip/character.json");
+    console.log(atlasJSON)
+
+    spriteSheet.parseAtlasDefinition(atlasJSON)
 
     for (let i = 0; i < assets.length; i++) {
         frames.push(new Image());
@@ -47,6 +79,8 @@ const animate = function(){
 const onImageLoad = function() {
     console.log('Se cargó la imagen');
 }
+
+
 
 setup();
 

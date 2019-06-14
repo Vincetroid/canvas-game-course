@@ -1,11 +1,12 @@
 var gSpriteSheets = {};
 
-SpriteSheetClass = Class.extend({
+// SpriteSheetClass = Class.extend({
+var spriteSheet = {
     img: null,
     url: "",
     sprites: new Array(),
 
-    init: function() {},
+    init: function() { console.log('init')},
     load: function(imgName) {
         this.url = imgName;
 
@@ -17,7 +18,7 @@ SpriteSheetClass = Class.extend({
         gSpriteSheets[imgName] = this;
     },
 
-    defSprite = function (name, x, y, w, h, cx, cy) {
+    defSprite: function (name, x, y, w, h, cx, cy) {
         var spt = {
             "id": name,
             "x": x,
@@ -30,8 +31,9 @@ SpriteSheetClass = Class.extend({
         this.sprites.push(spt);
     },
 
-    parseAtlasDefinition = function(atlasJSON) {
-        var parsed = JSON.parse(atlasJSON);
+    parseAtlasDefinition: function(atlasJSON) {
+        // var parsed = JSON.parse(atlasJSON);
+        var parsed = atlasJSON;
 
         for(var key in parsed.frames) {
             var sprite = parsed.frames[key];
@@ -69,8 +71,8 @@ SpriteSheetClass = Class.extend({
         // If we don't find the sprite, return null.
 		return null;
 	}
-
-});
+}
+// });
 
 function drawSprite(spriteName, posX, posY){
     //Iterar por todos los spritesheets para encontrar el que queremos
@@ -94,4 +96,8 @@ function __drawSpriteInternal(spt, sheet, posX, posY) {
     };
 
     ctx.drawImage(sheet.img, spt.x, spt.y, spt.w, spt.h, posX + hlf.x, posY + hlf.y, spt.w, spt.h);
+}
+
+function test() {
+    console.log('I am test');
 }
