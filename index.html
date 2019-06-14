@@ -11,19 +11,18 @@
 
 let canvas = null;
 let context = null;
-let frameRate = 1000 / 10;
+const frameRate = 1000 / 10;
 let frame = 0;
-let img = null;
-let assets = [
+const assets = [
     './sprite_sheet_intermediate/character-1.png',
     './sprite_sheet_intermediate/character-2.png',
     './sprite_sheet_intermediate/character-3.png',
     './sprite_sheet_intermediate/character-4.png',
     './sprite_sheet_intermediate/character-5.png',
 ];
-let frames = [];
+const frames = [];
 
-var setup = function() {
+const setup = function() {
     canvas = document.getElementById('my_canvas');
     context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -34,22 +33,19 @@ var setup = function() {
         frames[i].src = assets[i];
         frames[i].onload = onImageLoad;    
     }
-    
+
     setInterval(animate, frameRate);
     
 };  
 
-
-var animate = function(){
-  
+const animate = function(){
     context.clearRect(0,0,canvas.width, canvas.height);
-    context.drawImage(frames[frame], 192, 192);
+    context.drawImage(frames[frame], 0, 0);
     frame = (frame + 1) % frames.length;
 };
 
-var onImageLoad = function() {
+const onImageLoad = function() {
     console.log('Se cargó la imagen');
-    // context.drawImage(img, 192, 192);
 }
 
 setup();
