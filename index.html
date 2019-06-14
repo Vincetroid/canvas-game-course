@@ -11,29 +11,45 @@
 
 let canvas = null;
 let context = null;
+let frameRate = 1000 / 10;
+let frame = 0;
 let img = null;
 let assets = [
-    './frames_mario/mariowalk01.png',
-    './frames_mario/mariowalk02.png',
-    './frames_mario/mariowalk03.png',
+    './sprite_sheet_intermediate/character-1.png',
+    './sprite_sheet_intermediate/character-2.png',
+    './sprite_sheet_intermediate/character-3.png',
+    './sprite_sheet_intermediate/character-4.png',
+    './sprite_sheet_intermediate/character-5.png',
 ];
-let frames = assets;
+let frames = [];
 
-setup = function() {
+var setup = function() {
     canvas = document.getElementById('my_canvas');
     context = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    img = new Image();
-    img.onload = onImageLoad;
-    img.src = 'link.png';
+    for (let i = 0; i < assets.length; i++) {
+        frames.push(new Image());
+        frames[i].src = assets[i];
+        frames[i].onload = onImageLoad;    
+    }
+    
+    setInterval(animate, frameRate);
     
 };  
 
-onImageLoad = function() {
+
+var animate = function(){
+  
+    context.clearRect(0,0,canvas.width, canvas.height);
+    context.drawImage(frames[frame], 192, 192);
+    frame = (frame + 1) % frames.length;
+};
+
+var onImageLoad = function() {
     console.log('Se cargó la imagen');
-    context.drawImage(img, 192, 192);
+    // context.drawImage(img, 192, 192);
 }
 
 setup();
