@@ -9,44 +9,48 @@
     <canvas id="my_canvas"></canvas>
 <script src="SpriteSheet.js"></script>
 <script>
-// "use strict";
-
-test();
 
 let canvas = null;
 let context = null;
 const frameRate = 1000 / 10;
 let frame = 0;
+
 // const assets = [
-//     spriteSheet.load('./sprite_sheet_intermediate/character-1.png'),
-//     spriteSheet.load('./sprite_sheet_intermediate/character-2.png'),
-//     spriteSheet.load('./sprite_sheet_intermediate/character-3.png'),
-//     spriteSheet.load('./sprite_sheet_intermediate/character-4.png'),
-//     spriteSheet.load('./sprite_sheet_intermediate/character-5.png'),
+//     'character-0.png',
+//     'character-1.png',
+//     'character-2.png',
+//     'character-3.png',
+//     'character-4.png',
+//     'character-5.png',
 // ];
-const assets = [
-    './sprite_sheet_intermediate/character-1.png',
-    './sprite_sheet_intermediate/character-2.png',
-    './sprite_sheet_intermediate/character-3.png',
-    './sprite_sheet_intermediate/character-4.png',
-    './sprite_sheet_intermediate/character-5.png',
+
+const framesFileNames = [
+    'character-0.png',
+    'character-1.png',
+    'character-2.png',
+    'character-3.png',
+    'character-4.png',
+    'character-5.png',
 ];
-const frames = [];
+
+// const frames = [];
 
 const loadAtlas = function(urlRequest) {
     let requestAtlas = new Request(urlRequest);
 
-    fetch(requestAtlas)
+    const data = fetch(requestAtlas)
         .then(function(resp) {
-            console.log('entro')
-            console.log(resp)
+            // console.log('entro')
+            // console.log(resp)
             return resp.json();
         })
         .then(function(data) {
-            console.log(data)
+            // console.log(data)
             return data;
         });
-}
+
+    return data;
+};
 
 const setup = function() {
     canvas = document.getElementById('my_canvas');
@@ -54,33 +58,33 @@ const setup = function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // loadAtlas("./sprite_sheet_result_grid_strip/character.json");
     const atlasJSON = loadAtlas("./sprite_sheet_result_grid_strip/character.json");
-    console.log(atlasJSON)
 
-    spriteSheet.parseAtlasDefinition(atlasJSON)
+    atlasJSON.then(function(data) {
+        
+        //retrieve data from json about the atlas
+        spriteSheet.parseAtlasDefinition(data)
+        
+        //load the sprite sheet, or atlas?
+        spriteSheet.load('./sprite_sheet_result_grid_strip/character.png');
 
-    for (let i = 0; i < assets.length; i++) {
-        frames.push(new Image());
-        frames[i].src = assets[i];
-        frames[i].onload = onImageLoad;    
-    }
+        setInterval(animate, frameRate);
 
-    setInterval(animate, frameRate);
+    }).catch(function() {
+        console.log('Hubo un error al obtener el atlasJSON');
+    })
     
 };  
 
 const animate = function(){
-    context.clearRect(0,0,canvas.width, canvas.height);
-    context.drawImage(frames[frame], 0, 0);
-    frame = (frame + 1) % frames.length;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    drawSprite(framesFileNames[frame], 83, 83);
+    frame = (frame + 1) % framesFileNames.length;
 };
 
 const onImageLoad = function() {
     console.log('Se cargó la imagen');
-}
-
-
+};
 
 setup();
 
