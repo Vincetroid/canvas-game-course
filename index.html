@@ -8,6 +8,7 @@
 <body>
     <canvas id="my_canvas"></canvas>
 <script src="SpriteSheet.js"></script>
+<script src="TILEDMapClass.js"></script>
 <script>
 
 let canvas = null;
@@ -74,6 +75,8 @@ const setup = function() {
         console.log('Hubo un error al obtener el atlasJSON');
     })
     
+    console.log(gMap);
+    gMap.load('./map/zeldaTiledMap.json');
 };  
 
 const animate = function(){

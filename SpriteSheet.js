@@ -71,7 +71,7 @@ var spriteSheet = {
             // equals the passed in name...
             // debugger;
             if(this.sprites[i].id === name) {
-                debugger;
+                // debugger;
                 // and return that sprite if it does.
                 return this.sprites[i];
             }
