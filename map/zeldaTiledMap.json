@@ -826,11 +826,20 @@
  "renderorder":"left-up",
  "tiledversion":"1.2.4",
  "tileheight":16,
- "tilesets":[
-        {
-         "firstgid":1,
-         "source":"TiledSheet.tsx"
-        }],
+ "tilesets": [
+    {
+        "firstgid": 1,
+        "image": "..\/..\/..\/..\/..\/zeldaTiledMap.png",
+        "imageheight": 608,
+        "imagewidth": 832,
+        "margin": 0,
+        "name": "zeldaTiledMap",
+        "properties": {},
+        "spacing": 0,
+        "tileheight": 16,
+        "tilewidth": 16
+    }
+ ],
  "tilewidth":16,
  "type":"map",
  "version":1.2,
