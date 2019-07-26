@@ -56,26 +56,26 @@ const setup = function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const atlasJSON = loadAtlas("./sprite_sheet_result_grid_strip/character.json");
+    // const atlasJSON = loadAtlas("./sprite_sheet_result_grid_strip/character.json");
 
-    atlasJSON.then(function(data) {
+    // atlasJSON.then(function(data) {
         
-        //retrieve data from json about the atlas
-        spriteSheet.parseAtlasDefinition(data)
+    //     //retrieve data from json about the atlas
+    //     spriteSheet.parseAtlasDefinition(data)
         
-        //load the sprite sheet, or atlas?
-        spriteSheet.load('./sprite_sheet_result_grid_strip/character.png');
+    //     //load the sprite sheet, or atlas?
+    //     spriteSheet.load('./sprite_sheet_result_grid_strip/character.png');
 
-        setInterval(animate, frameRate);
+    //     setInterval(animate, frameRate);
 
-    }).catch(function() {
-        console.log('Hubo un error al obtener el atlasJSON');
-    })
+    // }).catch(function() {
+    //     console.log('Hubo un error al obtener el atlasJSON');
+    // })
     
     console.log('gMap');
     console.log(gMap);
-    gMap.load('./map/zeldaTiledMap.json');
-    gMap.draw(context);
+    gMap.load('./map/zeldaTiledMap.json', context);
+    // gMap.draw(context);
 };  
 
 const animate = function(){

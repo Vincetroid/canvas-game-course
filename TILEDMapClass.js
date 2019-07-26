@@ -23,7 +23,7 @@ var gMap = {
 
     fullyLoaded: false,
 
-    load: function (map) {
+    load: function (map, context) {
 
         this.xhrGet(map, (data) => {
             // debugger
@@ -32,6 +32,7 @@ var gMap = {
             // Once the XMLHttpRequest loads, call the
             // parseMapJSON method.
             gMap.parseMapJSON(data.currentTarget.responseText); 
+            gMap.draw(context);
         });
         
     },
@@ -88,6 +89,7 @@ var gMap = {
             this.imgLoadCount++;
             if (this.imgLoadCount === map.tilesets.length) {
                 this.fullyLoaded = true;
+                debugger;
             }
 
             //opcion 1 sin funcionar
@@ -134,6 +136,8 @@ var gMap = {
     },
 
     getTilePacket: function (tileIndex) {
+
+        debugger
 
         var pkt = {
             "img": null,
@@ -208,6 +212,7 @@ var gMap = {
     // Draws all of the map data to the passed-in
     // canvas context, 'ctx'.
     draw: function (ctx) {
+        debugger;
         // First, we need to check if the map data has
         // already finished loading.
         if(!gMap.fullyLoaded) return;
