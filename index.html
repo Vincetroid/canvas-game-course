@@ -41,12 +41,9 @@ const loadAtlas = function(urlRequest) {
 
     const data = fetch(requestAtlas)
         .then(function(resp) {
-            // console.log('entro')
-            // console.log(resp)
             return resp.json();
         })
         .then(function(data) {
-            // console.log(data)
             return data;
         });
 
@@ -75,6 +72,7 @@ const setup = function() {
         console.log('Hubo un error al obtener el atlasJSON');
     })
     
+    console.log('gMap');
     console.log(gMap);
     gMap.load('./map/zeldaTiledMap.json');
     gMap.draw(context);

@@ -60,19 +60,58 @@ var gMap = {
         this.tileSize.y = map.tileheight;
         this.pixelSize.x = this.numXTiles * this.tilewidth;
         this.pixelSize.y = this.numYTiles * this.tileheight;
-        
+
+
+        console.log('map.tilesets.length');
+        console.log(map.tilesets.length);
+
+        // debugger
+        // let img = new Image();
+        //     img.onload = () => {
+        //         console.log('within onload');
+        //         this.imgLoadCount++;
+        //         if (this.imgLoadCount === map.tilesets.length) {
+        //             this.fullyLoaded = true;              
+        //         }
+        //     };
+
         map.tilesets.forEach((element, i) => {
             let img = new Image();
+            // let img = await new Image().decode();
+            console.log('new image')
+            console.log(img)
+            // let img = document.createElement("img");
 
-            img.onload = function() {
-                this.imgLoadCount++;
-                if (this.imgLoadCount === map.tilesets.length) {
-                    this.fullyLoaded = true;              
-                }
-            };
+            debugger
 
-            img.src = './map/' + map.tilesets[i].source;
-            
+            //se omitió onload porque no se disparaba
+            this.imgLoadCount++;
+            if (this.imgLoadCount === map.tilesets.length) {
+                this.fullyLoaded = true;
+            }
+
+            //opcion 1 sin funcionar
+            // img.onload = function() {
+            //     console.log('within onload');
+            //     this.imgLoadCount++;
+            //     if (this.imgLoadCount === map.tilesets.length) {
+            //         this.fullyLoaded = true;              
+            //     }
+            // };
+
+            //opcion 2 sin fun
+            // img.addEventListener("load", 
+            //     function() {
+            //         console.log('within onload');
+            //         this.imgLoadCount++;
+            //         if (this.imgLoadCount === map.tilesets.length) {
+            //             this.fullyLoaded = true;              
+            //         }
+            //     }, 
+            // false);
+
+            img.src = './map/' + map.tilesets[i].image;
+
             var ts = {
                 
                 "firstgid":  map.tilesets[i].firstgid,

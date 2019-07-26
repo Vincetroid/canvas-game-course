@@ -829,7 +829,7 @@
  "tilesets": [
     {
         "firstgid": 1,
-        "image": "..\/..\/..\/..\/..\/zeldaTiledMap.png",
+        "image": "..\/..\/..\/..\/..\/canvas-game-course\/map\/zeldaTiledMap.png",
         "imageheight": 608,
         "imagewidth": 832,
         "margin": 0,
