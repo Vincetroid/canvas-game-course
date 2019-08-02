@@ -10,13 +10,13 @@ var gMap = {
     tileSets: [],
 
     tileSize: {
-        "x": 32,
-        "y": 32
+        "x": 16,
+        "y": 16
     },
 
     pixelSize: {
-        "x": 32,
-        "y": 32
+        "x": 16,
+        "y": 16
     },
     
     imgLoadCount: 0,
@@ -27,8 +27,8 @@ var gMap = {
 
         this.xhrGet(map, (data) => {
             // debugger
-            console.log('data')
-            console.log(data)
+            // console.log('data')
+            // console.log(data)
             // Once the XMLHttpRequest loads, call the
             // parseMapJSON method.
             gMap.parseMapJSON(data.currentTarget.responseText); 
@@ -47,24 +47,24 @@ var gMap = {
     },
 
     parseMapJSON: function (mapJSON) {
-        console.log('mapJSON');
-        console.log(mapJSON);
+        // console.log('mapJSON');
+        // console.log(mapJSON);
         
         // debugger;
         
         gMap.currMapData = JSON.parse(mapJSON);
 
         const map = gMap.currMapData;
-        this.numXTiles = map.height;
-        this.numYTiles = map.width;
+        this.numXTiles = map.width;
+        this.numYTiles = map.height;
         this.tileSize.x = map.tilewidth;
         this.tileSize.y = map.tileheight;
         this.pixelSize.x = this.numXTiles * this.tilewidth;
         this.pixelSize.y = this.numYTiles * this.tileheight;
 
 
-        console.log('map.tilesets.length');
-        console.log(map.tilesets.length);
+        // console.log('map.tilesets.length');
+        // console.log(map.tilesets.length);
 
         // debugger
         // let img = new Image();
@@ -79,17 +79,17 @@ var gMap = {
         map.tilesets.forEach((element, i) => {
             let img = new Image();
             // let img = await new Image().decode();
-            console.log('new image')
-            console.log(img)
+            // console.log('new image')
+            // console.log(img)
             // let img = document.createElement("img");
 
-            debugger
+            // debugger
 
             //se omitió onload porque no se disparaba
             this.imgLoadCount++;
             if (this.imgLoadCount === map.tilesets.length) {
                 this.fullyLoaded = true;
-                debugger;
+                // debugger;
             }
 
             //opcion 1 sin funcionar
@@ -135,9 +135,8 @@ var gMap = {
  
     },
 
-    getTilePacket: function (tileIndex) {
+    getTilePacket: function (tileIndex, counter) {
 
-        debugger
 
         var pkt = {
             "img": null,
@@ -181,9 +180,10 @@ var gMap = {
         //    the 'firstgid' of the tileset we found earlier.
         //
         
-        var localIdx = tileIndex - this.tileSets[i].firstgid;
+        // var localIdx = tileIndex;
+        // var localIdx = tileIndex - this.tileSets[i].firstgid;
         
-
+        // debugger
 
         // 2) The (x,y) position of the tile in terms of the
         //    number of tiles in our tileset. This is based on
@@ -194,8 +194,11 @@ var gMap = {
         //    modulo and division operators here.
         //
         
-        var lTileX = Math.floor(localIdx % this.tileSets[i].numXTiles);
-        var lTileY = Math.floor(localIdx / this.tileSets[i].numXTiles);
+        var lTileX = Math.floor(counter % this.tileSets[i].numXTiles);
+        var lTileY = Math.floor(counter / this.tileSets[i].numXTiles);
+
+        //console.log('lTileX' + lTileX);
+        // console.log('lTileY' + lTileY + '\n');
 
         // 3) the (x,y) pixel position in our tileset image of the
         //    tile we want to draw. This is based on the tile
@@ -212,7 +215,7 @@ var gMap = {
     // Draws all of the map data to the passed-in
     // canvas context, 'ctx'.
     draw: function (ctx) {
-        debugger;
+        // debugger;
         // First, we need to check if the map data has
         // already finished loading.
         if(!gMap.fullyLoaded) return;
@@ -243,7 +246,7 @@ var gMap = {
                 //    b) If the tile id is not 0, then we need to grab
                 //       the packet data using 'getTilePacket' called
                 //       on that tile id.
-                var tPKT = this.getTilePacket(tID);
+                var tPKT = this.getTilePacket(tID, tileIDX);
 
                 // Now we need to calculate the (x,y) position we want to draw
                 // to in our game world.
@@ -254,7 +257,11 @@ var gMap = {
                 //
                 
                 var worldX = Math.floor(tileIDX % this.numXTiles) * this.tileSize.x;
-                var worldY = Math.floor(tileIDX % this.numXTiles) * this.tileSize.y;
+                var worldY = Math.floor(tileIDX / this.numXTiles) * this.tileSize.y;
+                debugger;
+                
+                //worldX = 0; 
+                //worldY = 0; 
                 
 
                 // Now, we're finally drawing the map to our canvas! The 'drawImage'
@@ -273,6 +280,9 @@ var gMap = {
                 // Note that we don't want to stretch our tiles at all, so the
                 // source height and width should be the same as the destination!
                 //
+                console.log(tPKT.px, tPKT.py,
+                worldX, worldY);
+
                 ctx.drawImage(tPKT.img, tPKT.px, tPKT.py,
                             this.tileSize.x, this.tileSize.y,
                             worldX, worldY,

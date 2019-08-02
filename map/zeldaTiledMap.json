@@ -830,8 +830,8 @@
     {
         "firstgid": 1,
         "image": "..\/..\/..\/..\/..\/canvas-game-course\/map\/zeldaTiledMap.png",
-        "imageheight": 608,
-        "imagewidth": 832,
+        "imageheight": 304, 
+        "imagewidth": 416,
         "margin": 0,
         "name": "zeldaTiledMap",
         "properties": {},
