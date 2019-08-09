@@ -1,0 +1,58 @@
+////////////////////////////////////////////////////////////////////
+//
+// QUIZ
+// 
+// You are given two functions, onMouseMove and onKeyDown to use for 
+// event handling. Attach the 'mousemove' and 'keydown' events to the 
+// canvas DOM element.
+// After that, return the values as specified below.
+// 
+// If you are interested, try using console.log to print out the
+// position of the onmousemove event and the ID of the key pressed,
+// then look at it in the Developer Tools.
+// 
+// You can assume that our canvas element has an ID of 'my_canvas'.
+//
+////////////////////////////////////////////////////////////////////
+
+function setup() {
+	// TASK #1
+	// Specify the event handler for the 'mousemove' and 'keydown' events.
+	// Remember that you can grab a DOM element using the document.getElementByID
+	// method, and that the syntax for the addEventHandler method is:
+	//
+	// DOMElement.addEventHandler('event name', eventHandlerFunction);
+	//
+	
+	document.getElementById('my_canvas').addEventListener('mousemove', onMouseMove);
+	document.getElementById('my_canvas').addEventListener('keydown', onKeyDown);
+}
+
+function onMouseMove(event) {
+	// TASK #2
+	// Grab the clientX and clientY properties of the event object parameter.
+	// Make sure you use the clientX and clientY values, as they are canvas translated.
+	// After that, return the posx value.
+	//
+	
+	const posX = event.clientX;
+	const posy = event.clientY;
+	
+	console.log(posX, posY);
+	
+	return posX;
+
+}
+
+function onKeyDown(event) {
+	// TASK #3
+	// Grab the keyID property of the event object parameter, then return it.
+	//
+	
+	const keyId = event.keyID;
+	
+	console.log(keyId);
+	
+	return keyId;
+	
+}
