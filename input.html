@@ -43,7 +43,7 @@
 //
 ////////////////////////////////////////////////////////////////////
 
-var keyState = [];
+var keyState = [256];
 
 function setup() {
 	// TASK #1
@@ -56,7 +56,8 @@ function setup() {
     
 	
 	document.getElementById('my_canvas').addEventListener('mousemove', onMouseMove);
-	// document.getElementById('my_canvas').addEventListener('onkeydown', onKeyDown);
+	window.addEventListener('keydown', onKeyDown);
+	window.addEventListener('keyup', onKeyUp);
 }
 
 function onMouseMove(event) {
@@ -76,16 +77,23 @@ function onMouseMove(event) {
 }
 
 function onKeyDown(event) {
+    console.log('onkeyDown')
     // TASK #3
-		// Grab the keyID property of the event object parameter,
-		// then set the equivalent element in the keyState array
-		// to true.
-        //
-        // YOUR CODE HERE
-        
+    // Grab the keyID property of the event object parameter,
+    // then set the equivalent element in the keyState array
+    // to true.
+    //
+    // YOUR CODE HERE
+    const keyID = event.keyCode;
+    keyState[keyID] = true;
+    console.log(event);
+
+    update();
+    
 }
 
 function onKeyUp(event) {
+    console.log('onkeyUp')
     // TASK #4
     // Grab the keyID property of the event object parameter, 
     // then set the equivalent element in the keyState array
@@ -94,10 +102,23 @@ function onKeyUp(event) {
     
     //modify the keyState array to keep track of which 
     // keys are currently being pressed.
-    const key = event.keyCode;
+    const keyID = event.keyCode;
+    keyState[keyID] = false;
+
+    update();
 
 }
 
+function update() {
+    // 87 is the corresponding ASCII keycode for the key 'w'.
+    KeyW = 87;
+
+    if(keyState[KeyW])
+        // Drop the beat.
+        console.log("FORWARD!!!");
+    // etc.
+}
+    
 setup();
 
 </script>
