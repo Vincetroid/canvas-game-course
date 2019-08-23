@@ -91,7 +91,17 @@ var inputEngine = {
 		// You'll need to use the bindings object you set in 'bind'
 		// in order to do this.
 		//
-		// YOUR CODE HERE
+        // YOUR CODE HERE
+        
+        const keyID = event.keyCode;
+        const action = this.bindings[keyID];
+        if (action) {
+            this.actions[action] = false;
+        }
+        
+        // update();
+        console.log('this.act');
+        console.log(this.actions);
 	},
 
 	// TASK #1
