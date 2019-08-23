@@ -126,8 +126,8 @@ var gMap = {
                 "numXTiles": Math.floor( 416 / this.tileSize.x ),
                 "numYTiles": Math.floor( 304 / this.tileSize.y )
             };
-            console.log('ts')
-            console.log(ts)
+            // console.log('ts')
+            // console.log(ts)
 
             this.tileSets.push(ts);
 
@@ -258,7 +258,7 @@ var gMap = {
                 
                 var worldX = Math.floor(tileIDX % this.numXTiles) * this.tileSize.x;
                 var worldY = Math.floor(tileIDX / this.numXTiles) * this.tileSize.y;
-                debugger;
+                // debugger; //IMPORTANTE PARA IR VIENDO COMO SE DIBUJA
                 
                 //worldX = 0; 
                 //worldY = 0; 
@@ -280,8 +280,9 @@ var gMap = {
                 // Note that we don't want to stretch our tiles at all, so the
                 // source height and width should be the same as the destination!
                 //
-                console.log(tPKT.px, tPKT.py,
-                worldX, worldY);
+                
+                // console.log(tPKT.px, tPKT.py,
+                // worldX, worldY); //bueno para depurar
 
                 ctx.drawImage(tPKT.img, tPKT.px, tPKT.py,
                             this.tileSize.x, this.tileSize.y,
